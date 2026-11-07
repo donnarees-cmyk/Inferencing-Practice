@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unlock the Inference | Grade 6 ELA</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1b2a5c; --navy2:#26397a; --gold:#f2b632; --gold2:#ffd76a;
+  --red:#e8505b; --orange:#f7913d; --yellow:#f9d64a; --green:#3cb878; --blue:#3b8fe0; --purple:#8a5cd6;
+  --bg:#fdf8ee; --card:#ffffff; --ink:#1f2433; --muted:#5d6478; --line:#e7e1d3;
+  --ok:#e5f7ec; --okb:#3cb878; --no:#fde8e9; --nob:#e8505b;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:'Nunito',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:18px;line-height:1.55;-webkit-text-size-adjust:100%}
+h1,h2,h3{font-family:'Fredoka',sans-serif;line-height:1.2;margin:0 0 .4em}
+button{font-family:inherit;font-size:inherit;cursor:pointer}
+.rainbow{height:6px;background:linear-gradient(90deg,var(--red),var(--orange),var(--yellow),var(--green),var(--blue),var(--purple))}
+header{background:var(--navy);color:#fff;padding:14px 16px}
+.hwrap{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.logo{height:64px;width:auto;background:#fff;border-radius:10px;padding:4px}
+.wordmark{font-family:'Fredoka';font-size:20px;line-height:1.1}
+.wordmark b{color:var(--gold);display:block;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.htitle{flex:1;min-width:200px}
+.htitle h1{font-size:26px;margin:0}
+.htitle p{margin:2px 0 0;color:#cfd6f3;font-size:15px}
+.keys{display:flex;gap:4px;font-size:22px}
+.keys span{opacity:.25;filter:grayscale(1);transition:.3s}
+.keys span.got{opacity:1;filter:none;transform:scale(1.1)}
+main{max-width:900px;margin:0 auto;padding:18px 16px 60px}
+.progress{background:#ece5d4;border-radius:99px;height:14px;overflow:hidden;margin:4px 0 6px}
+.progress div{height:100%;background:linear-gradient(90deg,var(--gold),var(--orange));width:0;transition:width .4s}
+.plabel{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);font-weight:700}
+.card{background:var(--card);border-radius:18px;padding:22px;margin:16px 0;box-shadow:0 3px 0 var(--line),0 8px 24px rgba(27,42,92,.06);border:2px solid var(--line)}
+.sechead{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.badge{background:var(--navy);color:var(--gold2);font-family:'Fredoka';border-radius:99px;padding:4px 14px;font-size:15px}
+.time{background:#fff4d6;color:#8a5a00;border-radius:99px;padding:4px 12px;font-size:14px;font-weight:800}
+.sechead h2{font-size:28px;margin:0;flex-basis:100%;color:var(--navy)}
+.teach{background:#f3f6ff;border-left:6px solid var(--blue);border-radius:12px;padding:14px 16px;margin:14px 0}
+.teach.gold{background:#fff8e3;border-color:var(--gold)}
+.teach.green{background:#ecf9f1;border-color:var(--green)}
+.teach.purple{background:#f4effc;border-color:var(--purple)}
+.teach h3{font-size:20px;color:var(--navy)}
+.formula{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin:16px 0;font-family:'Fredoka';font-size:20px;text-align:center}
+.formula .box{border-radius:14px;padding:12px 16px;color:#fff;min-width:130px}
+.formula .op{font-size:30px;color:var(--navy)}
+.b1{background:var(--blue)}.b2{background:var(--purple)}.b3{background:var(--green)}
+.formula small{display:block;font-family:'Nunito';font-size:14px;opacity:.95}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+.mini{border-radius:14px;padding:14px;border:2px solid var(--line);background:#fff}
+.mini h3{font-size:18px;margin-bottom:4px}
+.mini p{margin:0;font-size:16px}
+.passage{background:#fffdf7;border:2px dashed #e0c98a;border-radius:14px;padding:18px 20px;margin:14px 0;font-size:18px}
+.passage h3{text-align:center;color:var(--navy)}
+.passage p{margin:0 0 .8em}
+.passage .pn{font-weight:800;color:var(--gold);margin-right:6px;font-size:14px}
+.read{background:var(--navy);color:#fff;border:0;border-radius:99px;padding:6px 14px;font-size:14px;font-weight:800;display:inline-flex;align-items:center;gap:6px}
+.read:active{transform:scale(.97)}
+.read.on{background:var(--red)}
+.q{border:2px solid var(--line);border-radius:16px;padding:16px;margin:16px 0;background:#fff}
+.qtop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.qnum{font-family:'Fredoka';color:var(--purple);font-size:15px}
+.qtext{font-weight:800;margin:4px 0 10px}
+.choices{display:grid;gap:10px}
+.choice{text-align:left;background:#f8f7f3;border:2px solid #e2ddd0;border-radius:12px;padding:12px 14px;display:flex;gap:12px;align-items:flex-start;color:var(--ink);min-height:52px}
+.choice .l{flex:0 0 32px;height:32px;border-radius:50%;background:#fff;border:2px solid #cfc8b6;display:flex;align-items:center;justify-content:center;font-family:'Fredoka';font-weight:700}
+.choice:hover:not([disabled]){border-color:var(--blue);background:#eef5ff}
+.choice[disabled]{cursor:default}
+.choice.right{background:var(--ok);border-color:var(--okb)}
+.choice.right .l{background:var(--okb);border-color:var(--okb);color:#fff}
+.choice.wrong{background:var(--no);border-color:var(--nob)}
+.choice.wrong .l{background:var(--nob);border-color:var(--nob);color:#fff}
+.choice.dim{opacity:.55}
+.fb{margin-top:12px;border-radius:12px;padding:12px 14px;font-size:16px;display:none}
+.fb.show{display:block}
+.fb.good{background:var(--ok);border:2px solid var(--okb)}
+.fb.bad{background:#fff4e5;border:2px solid var(--orange)}
+.fb b{font-family:'Fredoka';font-size:18px}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:20px;flex-wrap:wrap}
+.btn{border:0;border-radius:14px;padding:14px 22px;font-weight:800;font-size:18px;background:var(--gold);color:var(--navy);box-shadow:0 4px 0 #c48d10}
+.btn:active{transform:translateY(2px);box-shadow:0 2px 0 #c48d10}
+.btn.sec{background:#e9e4d6;color:var(--navy);box-shadow:0 4px 0 #cbc3ae}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.hint{font-size:14px;color:var(--muted);font-weight:700;align-self:center}
+input[type=text]{font-size:20px;padding:12px 14px;border-radius:12px;border:2px solid #d6cfbd;width:100%;max-width:360px;font-family:inherit}
+.std{font-size:14px;color:var(--muted);background:#f6f2e7;border-radius:12px;padding:10px 14px;margin-top:10px}
+.std b{color:var(--navy)}
+.cert{text-align:center;border:6px double var(--gold);border-radius:20px;padding:26px 18px;background:radial-gradient(circle at top,#fffaf0,#fff)}
+.cert .big{font-family:'Fredoka';font-size:46px;color:var(--navy);margin:6px 0}
+.cert .score{font-family:'Fredoka';font-size:22px}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:16px;margin:10px 0}
+td,th{border:2px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--navy);color:#fff;font-family:'Fredoka';font-weight:500}
+footer{text-align:center;font-size:13px;color:var(--muted);padding:20px 16px 40px}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:50}
+.saved{position:fixed;bottom:14px;right:14px;background:var(--navy);color:#fff;border-radius:99px;padding:6px 14px;font-size:13px;font-weight:800;opacity:0;transition:opacity .3s;z-index:40}
+.saved.show{opacity:.92}
+@media (max-width:600px){
+  body{font-size:17px}
+  .card{padding:16px}
+  .sechead h2{font-size:23px}
+  .htitle h1{font-size:21px}
+  .logo{height:48px}
+}
+</style>
+</head>
+<body>
+<div class="rainbow"></div>
+<header>
+  <div class="hwrap">
+    <img class="logo" src="logo.png" alt="The Literacy Locksmith" onerror="this.style.display='none';document.getElementById('wm').style.display='block'">
+    <div class="wordmark" id="wm" style="display:none"><b>The Literacy Locksmith</b>Unlocking Skills. Opening Minds.</div>
+    <div class="htitle">
+      <h1>🔑 Unlock the Inference</h1>
+      <p>Grade 6 ELA · Self-Guided Tutorial · About 30 minutes</p>
+    </div>
+    <div class="keys" id="keys" aria-label="Keys earned"></div>
+  </div>
+</header>
+<div class="rainbow"></div>
+
+<main>
+  <div class="plabel"><span id="plabel">Getting started</span><span id="pmins"></span></div>
+  <div class="progress"><div id="pbar"></div></div>
+  <div id="app"></div>
+</main>
+
+<footer>The Literacy Locksmith · Created and copyrighted by Donna Rees · Your answers save automatically on this iPad.</footer>
+<canvas id="confetti"></canvas>
+<div class="saved" id="saved">✓ Saved</div>
+
+<script>
+/* ============ CONTENT ============ */
+const SECTIONS = [
+{
+  key:'mission', title:'Your Mission: What Is an Inference?', mins:3,
+  html:`
+  <div class="teach" data-say>
+    <h3>Authors don't tell you everything.</h3>
+    <p>Writers often <b>show</b> instead of <b>tell</b>. They leave clues and trust you, the reader, to figure out what they mean. When you use those clues to figure out something the text does not say directly, you are making an <b>inference</b>.</p>
+  </div>
+  <div class="formula" aria-label="Text clues plus what I know equals inference">
+    <div class="box b1">Text Clues<small>what the text says</small></div>
+    <div class="op">+</div>
+    <div class="box b2">What I Know<small>my own experience</small></div>
+    <div class="op">=</div>
+    <div class="box b3">Inference<small>a smart, supported conclusion</small></div>
+  </div>
+  <div class="teach gold" data-say>
+    <h3>Try it with one sentence</h3>
+    <p><i>"Jalen slammed his locker, threw his backpack on the floor, and didn't say a word to anyone at lunch."</i></p>
+    <p><b>Text clues:</b> he slammed the locker, threw his backpack, and stayed silent.<br>
+    <b>What I know:</b> people often act this way when they are upset.<br>
+    <b>Inference:</b> Jalen is angry or upset about something.</p>
+    <p>Notice the text never uses the word <i>angry</i>. You figured it out like a detective!</p>
+  </div>
+  <div class="teach purple" data-say>
+    <h3>Why does this matter?</h3>
+    <p>On the FAST test, many questions ask what you can <b>infer</b>, what a detail <b>suggests</b>, or what a character's actions <b>reveal</b>. Those are all inference questions. Every right answer must be <b>supported by evidence</b> in the text.</p>
+  </div>`,
+  qs:[
+    {q:'Which statement BEST describes an inference?',
+     c:['A fact copied word-for-word from the text','A conclusion based on text clues and what you already know','A wild guess about what might happen','A summary of the whole story'],
+     a:1, why:'An inference combines <b>text clues</b> with <b>what you know</b>. Copying words is just finding stated information, and a wild guess has no evidence.'},
+    {q:'"Grandma squinted at the menu, then held it at arm\'s length." What can you infer?',
+     c:['Grandma does not like the restaurant','Grandma is having trouble reading the small print','Grandma is very hungry','Grandma wants to leave'],
+     a:1, why:'Squinting and holding something far away are clues that a person is struggling to see it clearly.'}
+  ]
+},
+{
+  key:'clues', title:'Clue Detective: Where Do Clues Hide?', mins:6,
+  html:`
+  <div class="teach" data-say>
+    <h3>Three places authors hide clues</h3>
+    <p>Good readers look for clues in three places. Remember them as <b>A.W.D.</b></p>
+  </div>
+  <div class="grid3">
+    <div class="mini" style="border-color:var(--red)" data-say><h3>🏃 Actions</h3><p>What does the character <b>do</b>? Pacing, hiding, smiling, running away.</p></div>
+    <div class="mini" style="border-color:var(--blue)" data-say><h3>💬 Words</h3><p>What does the character <b>say</b>, and <b>how</b> do they say it? Whispered, snapped, joked.</p></div>
+    <div class="mini" style="border-color:var(--green)" data-say><h3>🔍 Descriptions</h3><p>What details describe the <b>setting</b> or the character's <b>body</b>? Shaky hands, dark clouds, an empty room.</p></div>
+  </div>
+  <div class="teach green" data-say>
+    <h3>Detective tip</h3>
+    <p>Before you choose an answer, ask yourself: <b>"Which words in the text made me think that?"</b> If you can't point to a clue, it is probably not a good inference.</p>
+  </div>
+  <p><b>Practice:</b> Read each mini-mystery. Choose the best inference. You get <b>one try</b>, so read carefully!</p>`,
+  qs:[
+    {q:'"Ava checked the clock for the fifth time. She tapped her pencil, glanced at the door, and whispered, \'Come on, come on.\'" What can you infer about Ava?',
+     c:['She is bored with her schoolwork','She is impatiently waiting for something or someone','She is afraid of the teacher','She forgot her homework'],
+     a:1, why:'The <b>actions</b> (checking the clock, glancing at the door) and <b>words</b> ("Come on, come on") show she is waiting impatiently.'},
+    {q:'"The kitchen smelled of smoke. A black, crumbly lump sat on the baking sheet, and Dad was waving a towel at the beeping alarm." What most likely happened?',
+     c:['Dad baked something that burned','The family is getting a new oven','Dad is cleaning the kitchen','The power went out'],
+     a:0, why:'The <b>descriptions</b> (smoke smell, black lump, beeping alarm) point to food burning in the oven.'},
+    {q:'"\'Oh, GREAT,\' Marcus muttered as rain poured onto the field right before the championship game." What does Marcus\'s word choice suggest?',
+     c:['He is excited about the rain','He loves playing in the rain','He is frustrated, and he is being sarcastic','He thinks the game will be easy'],
+     a:2, why:'"Muttered" plus the bad timing shows he does not really think it is great. He is being <b>sarcastic</b>, which shows frustration.'},
+    {q:'"Lena\'s cheeks turned red. She stared at her shoes and quickly stuffed the test with the big red \'D\' into her binder." How does Lena most likely feel?',
+     c:['Proud','Embarrassed','Confused','Excited'],
+     a:1, why:'Red cheeks, staring down, and hiding the test are clues that Lena feels <b>embarrassed</b> about her grade.'}
+  ]
+},
+{
+  key:'goldilocks', title:'The Goldilocks Rule: Find the BEST Inference', mins:5,
+  html:`
+  <div class="teach" data-say>
+    <h3>Test answers try to trick you</h3>
+    <p>On inference questions, the wrong answers usually fall into two traps. The right answer is <b>just right</b>.</p>
+  </div>
+  <div class="tablewrap"><table data-say>
+    <tr><th>Trap</th><th>What it looks like</th></tr>
+    <tr><td><b>🥶 Too Little</b></td><td>It just repeats what the text <b>already says</b>. That's not an inference.</td></tr>
+    <tr><td><b>🔥 Too Far</b></td><td>It sounds interesting, but the text gives <b>no evidence</b> for it. It's a guess.</td></tr>
+    <tr><td><b>😊 Just Right</b></td><td>It goes beyond the words <b>and</b> is supported by clues in the text.</td></tr>
+  </table></div>
+  <div class="teach gold" data-say>
+    <h3>Example</h3>
+    <p><i>"Sofia hugged her dog tightly as the moving truck pulled away from the only house she had ever lived in."</i></p>
+    <p>🥶 <b>Too little:</b> Sofia has a dog. (The text already says that.)<br>
+    🔥 <b>Too far:</b> Sofia will hate her new school. (No clue about school at all.)<br>
+    😊 <b>Just right:</b> Sofia feels sad about leaving her home. (The hug and "only house she had ever lived in" support it.)</p>
+  </div>`,
+  qs:[
+    {q:'"Mr. Patel walked into the classroom carrying a stack of papers and a huge smile. \'Wait until you see these scores!\' he said." Which is the JUST RIGHT inference?',
+     c:['Mr. Patel is carrying papers.','The class did well on a test.','Mr. Patel is going to give everyone a pizza party.','Mr. Patel is the best teacher in the school.'],
+     a:1, why:'A is <b>too little</b> (already stated). C and D go <b>too far</b>. His smile and excited words support that the class did well.'},
+    {q:'"Kai left half of his favorite pizza on the plate and went straight to bed at 7:00, even though it was Friday." Which inference goes TOO FAR?',
+     c:['Kai might not be feeling well.','Kai is acting differently than usual.','Kai broke his arm at soccer practice.','Something seems to be bothering Kai.'],
+     a:2, why:'Nothing in the text mentions soccer or an injury. That answer is a guess with <b>no evidence</b>, so it goes too far.'},
+    {q:'Why is "Too Little" NOT a good inference?',
+     c:['Because it is too short','Because it only repeats what the text directly states','Because it uses too much evidence','Because it is always false'],
+     a:1, why:'An inference must go <b>beyond</b> the words on the page. Restating the text is just recalling facts.'}
+  ]
+},
+{
+  key:'literary', title:'Read & Infer: A Story', mins:8,
+  html:`
+  <div class="teach green" data-say>
+    <h3>Directions</h3>
+    <p>Read the story carefully. Tap <b>Read Aloud</b> if you want to listen. Then answer the questions. Some questions come in two parts: <b>Part A</b> asks for an inference and <b>Part B</b> asks for the evidence that supports it.</p>
+  </div>
+  <div class="passage" id="p1">
+    <h3>The Empty Seat</h3>
+    <p><span class="pn">1</span>Maya gripped her lunch tray so tightly that her knuckles turned white. The cafeteria roared with noise: laughter, chairs scraping, someone shouting about a basketball game. Every table looked full, and every face looked like it already belonged somewhere.</p>
+    <p><span class="pn">2</span>She took a slow step forward, then stopped. At her old school, she had always sat by the window with Priya and Daniela. Here, she didn't even know where the windows were.</p>
+    <p><span class="pn">3</span>"You can sit here if you want," a voice said. A boy with a sketchbook slid his backpack off the chair beside him. "That seat's been empty since August. I'm Theo. I was new last year."</p>
+    <p><span class="pn">4</span>Maya hesitated, then lowered herself into the chair. Theo turned his sketchbook around. It was full of dragons, each one wearing a different silly hat.</p>
+    <p><span class="pn">5</span>"This one's my favorite," he said, pointing to a dragon in a chef's hat. "He only breathes fire on pancakes."</p>
+    <p><span class="pn">6</span>A laugh escaped before Maya could stop it. For the first time all morning, her shoulders dropped away from her ears, and she noticed her grip on the tray had loosened.</p>
+  </div>`,
+  passage:'p1',
+  qs:[
+    {q:'<b>Part A:</b> How does Maya MOST LIKELY feel at the beginning of the story?',
+     c:['Angry that the cafeteria is loud','Nervous and out of place at her new school','Excited to make new friends','Bored with her lunch'],
+     a:1, why:'Maya grips the tray tightly, stops walking, and feels like every face "already belonged somewhere." These clues show she feels <b>nervous and out of place</b>.'},
+    {q:'<b>Part B:</b> Which detail from the story BEST supports the answer to Part A?',
+     c:['"The cafeteria roared with noise"','"Maya gripped her lunch tray so tightly that her knuckles turned white."','"It was full of dragons, each one wearing a different silly hat."','"He only breathes fire on pancakes."'],
+     a:1, why:'White knuckles from gripping tightly is a physical clue that shows <b>nervousness</b>. The other details describe the setting or Theo\'s drawings, not Maya\'s feelings.'},
+    {q:'Theo says, "I was new last year." What does this detail suggest about why he invites Maya to sit with him?',
+     c:['He wants Maya to help him with homework.','He remembers how it feels to be new, so he understands how Maya feels.','He is not allowed to sit alone.','He wants to show off his drawings.'],
+     a:1, why:'Because Theo was once new himself, readers can infer he <b>understands</b> Maya\'s feelings and wants to help her feel welcome.'},
+    {q:'In paragraph 6, Maya\'s "shoulders dropped away from her ears" and her grip "loosened." What can the reader infer?',
+     c:['Maya is getting tired.','Maya is starting to feel relaxed and comfortable.','Maya is about to drop her tray.','Maya wants to go back to her old school.'],
+     a:1, why:'Tense shoulders and a tight grip were signs of worry. When they <b>relax</b>, it shows Maya is starting to feel comfortable with Theo.'},
+    {q:'Which statement BEST expresses a theme the reader can infer from the story?',
+     c:['Cafeterias are too loud for students.','A small act of kindness can help someone feel like they belong.','Drawing dragons is a good hobby.','It is hard to find the windows at a new school.'],
+     a:1, why:'Themes are inferred from what happens. Theo\'s simple invitation changes how Maya feels, showing that <b>small kindness</b> helps someone belong.'}
+  ]
+},
+{
+  key:'info', title:'Read & Infer: Informational Text', mins:5,
+  html:`
+  <div class="teach green" data-say>
+    <h3>Inferences work in nonfiction too!</h3>
+    <p>In informational texts, you infer <b>why</b> something happens, <b>what</b> the author wants you to understand, or <b>what would happen</b> based on the facts given.</p>
+  </div>
+  <div class="passage" id="p2">
+    <h3>Lights Out for Sea Turtles</h3>
+    <p><span class="pn">1</span>Every summer, thousands of sea turtles crawl onto Florida's beaches to lay their eggs in the sand. About two months later, the tiny hatchlings dig their way out, usually at night.</p>
+    <p><span class="pn">2</span>For millions of years, hatchlings have found the ocean by heading toward the brightest horizon. On a natural beach, that is the moon and starlight reflecting off the water.</p>
+    <p><span class="pn">3</span>Today, many beaches are lined with hotels, homes, and streetlights. Wildlife officers have found hatchlings wandering onto roads and into parking lots, far from the water.</p>
+    <p><span class="pn">4</span>Because of this, many Florida beach towns have passed rules requiring that lights facing the beach be turned off or covered during nesting season. Some homeowners now use special amber-colored bulbs. Volunteers walk the beaches at dawn, counting tracks that lead straight to the sea.</p>
+  </div>`,
+  passage:'p2',
+  qs:[
+    {q:'Based on paragraphs 2 and 3, why do some hatchlings end up on roads and in parking lots?',
+     c:['They are searching for food on land.','Bright lights from buildings confuse them, so they crawl away from the ocean.','They are too weak to reach the water.','Volunteers carry them there to keep them safe.'],
+     a:1, why:'Hatchlings head toward the <b>brightest</b> light. The text says beaches now have streetlights and buildings, so readers can infer that these lights pull hatchlings the wrong way.'},
+    {q:'In paragraph 4, volunteers count "tracks that lead straight to the sea." What can you infer these tracks show?',
+     c:['The lights-out rules are helping hatchlings find the ocean.','The turtles are leaving the beach forever.','There are fewer turtles than before.','Volunteers are making the tracks themselves.'],
+     a:0, why:'Tracks going <b>straight</b> to the water mean hatchlings were not confused by lights. That suggests the rules are <b>working</b>.'},
+    {q:'What does the author MOST LIKELY want readers to understand?',
+     c:['Florida should not allow hotels on the beach.','Sea turtles only lay eggs in Florida.','Human choices, like how we use lights, can help or harm wildlife.','Amber bulbs are cheaper than regular bulbs.'],
+     a:2, why:'The text shows how lights harmed hatchlings and how new rules help. The author wants readers to infer that <b>people\'s choices affect wildlife</b>.'}
+  ]
+},
+{
+  key:'exit', title:'Exit Ticket: Show What You Know', mins:3,
+  html:`
+  <div class="teach purple" data-say>
+    <h3>Final challenge!</h3>
+    <p>Answer these on your own. Use everything you learned: look for clues, think about what you know, and choose the <b>just right</b> answer.</p>
+  </div>
+  <div class="passage" id="p3">
+    <p>Coach Rivera blew her whistle and called the team over. Nobody moved for a second. Then Isaiah slowly walked over, his eyes on the scoreboard that still read <b>Visitors 4, Home 0</b>. Coach Rivera knelt down, looked at each player, and said, "I've never been prouder of how hard a team played. Next week, we come back stronger."</p>
+  </div>`,
+  passage:'p3',
+  qs:[
+    {q:'What can you infer happened in the game?',
+     c:['The home team won easily.','The home team lost the game.','The game was canceled.','The players did not try hard.'],
+     a:1, why:'The scoreboard reads 4 to 0 for the visitors, and the players move slowly. The <b>home team lost</b>.'},
+    {q:'Which detail BEST shows how the players feel?',
+     c:['"Coach Rivera blew her whistle"','"Nobody moved for a second."','"Coach Rivera knelt down"','"Next week, we come back stronger."'],
+     a:1, why:'The players not moving right away is an <b>action clue</b> that shows they feel disappointed.'},
+    {q:'What does Coach Rivera\'s speech reveal about her?',
+     c:['She is angry at the team.','She cares more about effort than about winning.','She wants to quit coaching.','She did not watch the game.'],
+     a:1, why:'She says she is proud of how <b>hard</b> they played even though they lost, so readers can infer she values <b>effort</b>.'}
+  ]
+}
+];
+const STANDARDS = `<b>Florida B.E.S.T. Standards:</b> ELA.K12.EE.2.1 Make inferences to support comprehension. · ELA.6.R.1.2 Explain how a theme is developed. · ELA.6.R.2.2 Analyze the central idea(s), implied or explicit, and its development. · ELA.K12.EE.1.1 Cite evidence to explain and justify reasoning.`;
+
+/* ============ STATE + AUTOSAVE ============ */
+const STORE='lls_inference_g6_v1';
+let S={name:'',step:0,ans:{},done:false};
+try{const raw=localStorage.getItem(STORE); if(raw) S=Object.assign(S,JSON.parse(raw));}catch(e){}
+function save(){
+  try{localStorage.setItem(STORE,JSON.stringify(S));
+    const el=document.getElementById('saved');el.classList.add('show');clearTimeout(save.t);save.t=setTimeout(()=>el.classList.remove('show'),1100);}catch(e){}
+}
+
+/* ============ READ ALOUD (Google US English only) ============ */
+let voice=null;
+function pickVoice(){
+  const vs=speechSynthesis.getVoices();
+  voice=vs.find(v=>v.name==='Google US English')||vs.find(v=>/Google/.test(v.name)&&v.lang==='en-US')||vs.find(v=>v.lang==='en-US'&&/Samantha|female/i.test(v.name))||vs.find(v=>v.lang==='en-US')||null;
+}
+if('speechSynthesis' in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice;}
+let speakingBtn=null;
+function clean(t){
+  return t.replace(/ELA\.[A-Z0-9.]+/g,'').replace(/[🔑🏃💬🔍🥶🔥😊]/g,'').replace(/\s+/g,' ').trim();
+}
+function speak(text,btn){
+  if(!('speechSynthesis' in window))return;
+  if(speakingBtn===btn){speechSynthesis.cancel();resetBtn();return;}
+  speechSynthesis.cancel();resetBtn();
+  // chunk by sentence so long passages don't stop early
+  const parts=clean(text).match(/[^.!?]+[.!?"”']*\s*/g)||[clean(text)];
+  speakingBtn=btn; if(btn){btn.classList.add('on');btn.innerHTML='⏹ Stop';}
+  parts.forEach((p,i)=>{
+    const u=new SpeechSynthesisUtterance(p);
+    if(voice)u.voice=voice; u.lang='en-US'; u.rate=0.95;
+    if(i===parts.length-1)u.onend=resetBtn;
+    speechSynthesis.speak(u);
+  });
+}
+function resetBtn(){ if(speakingBtn){speakingBtn.classList.remove('on');speakingBtn.innerHTML='🔊 Read Aloud';} speakingBtn=null; }
+function readBtn(getText){
+  const b=document.createElement('button');b.className='read';b.type='button';b.innerHTML='🔊 Read Aloud';
+  b.onclick=()=>speak(getText(),b);return b;
+}
+
+/* ============ RENDER ============ */
+const app=document.getElementById('app');
+const L='ABCD';
+const totalMins=SECTIONS.reduce((a,s)=>a+s.mins,0);
+
+function renderKeys(){
+  const k=document.getElementById('keys');k.innerHTML='';
+  SECTIONS.forEach((s,i)=>{const sp=document.createElement('span');sp.textContent='🔑';sp.title=s.title;
+    if(sectionDone(i))sp.classList.add('got');k.appendChild(sp);});
+}
+function sectionDone(i){return SECTIONS[i].qs.every((q,j)=>S.ans[i+'-'+j]!==undefined);}
+function progress(){
+  const step=S.step, n=SECTIONS.length;
+  const pct=S.done?100:Math.round((Math.max(0,step-1))/n*100);
+  document.getElementById('pbar').style.width=pct+'%';
+  document.getElementById('plabel').textContent=S.done?'Tutorial complete!':step===0?'Getting started':`Part ${step} of ${n}`;
+  let left=S.done?0:SECTIONS.slice(Math.max(0,step-1)).reduce((a,s)=>a+s.mins,0);
+  document.getElementById('pmins').textContent=S.done?'':`≈ ${step===0?totalMins:left} min left`;
+  renderKeys();
+}
+
+function render(){
+  speechSynthesis&&speechSynthesis.cancel();resetBtn();
+  if(S.done){renderFinish();progress();return;}
+  if(S.step===0){renderStart();progress();return;}
+  renderSection(S.step-1);progress();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderStart(){
+  app.innerHTML=`
+  <div class="card">
+    <div class="sechead"><span class="badge">Welcome, Detective!</span><span class="time">⏱ ${totalMins} minutes</span><h2>Unlock the Inference</h2></div>
+    <p>Today you'll learn how great readers figure out what an author <b>doesn't</b> say directly. You'll earn a 🔑 for each part you finish. Collect all ${SECTIONS.length} keys to unlock your certificate!</p>
+    <div class="teach gold">
+      <h3>How this works</h3>
+      <p>✔ Work through ${SECTIONS.length} short parts at your own pace.<br>
+      ✔ Tap <b>🔊 Read Aloud</b> any time you want to listen.<br>
+      ✔ Every question is multiple choice. You get <b>one try</b>, then you'll see an explanation.<br>
+      ✔ Your answers <b>save automatically</b> on this iPad, so you can come back later.</p>
+    </div>
+    <label for="nm"><b>Type your first name to begin:</b></label><br>
+    <input type="text" id="nm" autocomplete="off" value="${esc(S.name)}" placeholder="First name">
+    <div class="nav"><span></span><button class="btn" id="go">Start My Mission →</button></div>
+    <div class="std">${STANDARDS}</div>
+  </div>`;
+  const nm=document.getElementById('nm'),go=document.getElementById('go');
+  const chk=()=>go.disabled=!nm.value.trim(); chk();
+  nm.oninput=()=>{S.name=nm.value.trim();save();chk();};
+  go.onclick=()=>{S.step=1;save();render();};
+}
+
+function renderSection(i){
+  const s=SECTIONS[i];
+  app.innerHTML=`
+  <div class="card">
+    <div class="sechead"><span class="badge">Part ${i+1} of ${SECTIONS.length}</span><span class="time">⏱ about ${s.mins} min</span><h2>${s.title}</h2></div>
+    <div id="lesson">${s.html}</div>
+    <div id="qs"></div>
+    <div class="nav">
+      <button class="btn sec" id="back">← Back</button>
+      <span class="hint" id="hint"></span>
+      <button class="btn" id="next">${i===SECTIONS.length-1?'Finish & See My Score 🎉':'Next Part →'}</button>
+    </div>
+  </div>`;
+  // read buttons on teaching blocks
+  app.querySelectorAll('[data-say]').forEach(el=>{
+    const b=readBtn(()=>el.innerText); b.style.marginBottom='8px'; el.prepend(b);
+  });
+  app.querySelectorAll('.passage').forEach(el=>{
+    const b=readBtn(()=>el.innerText.replace(/^\s*\d+\s*/gm,'')); b.style.marginBottom='8px'; el.prepend(b);
+  });
+  const qw=document.getElementById('qs');
+  s.qs.forEach((q,j)=>qw.appendChild(buildQ(i,j,q)));
+  document.getElementById('back').onclick=()=>{S.step--;save();render();};
+  const next=document.getElementById('next'),hint=document.getElementById('hint');
+  const upd=()=>{const d=sectionDone(i);next.disabled=!d;hint.textContent=d?'🔑 Key earned!':'Answer every question to earn your key.';renderKeys();};
+  upd(); qw.addEventListener('answered',upd);
+  next.onclick=()=>{ if(i===SECTIONS.length-1){S.done=true;save();render();boom();} else {S.step++;save();render();} };
+}
+
+function buildQ(i,j,q){
+  const id=i+'-'+j, box=document.createElement('div'); box.className='q';
+  box.innerHTML=`<div class="qtop"><span class="qnum">Question ${j+1}</span></div>
+    <div class="qtext">${q.q}</div><div class="choices"></div><div class="fb"></div>`;
+  box.querySelector('.qtop').appendChild(readBtn(()=>{
+    const tmp=document.createElement('div');tmp.innerHTML=q.q;
+    const o=perm(q.c.length,i*7+j*13+3);
+    return tmp.innerText+' '+o.map((k,d)=>`Choice ${L[d]}. ${q.c[k]}.`).join(' ');
+  }));
+  const ch=box.querySelector('.choices'), fb=box.querySelector('.fb');
+  const order=perm(q.c.length,i*7+j*13+3), letterOf=k=>L[order.indexOf(k)];
+  order.forEach(k=>{
+    const c=q.c[k];
+    const b=document.createElement('button');b.type='button';b.className='choice';b.dataset.k=k;
+    b.innerHTML=`<span class="l">${letterOf(k)}</span><span>${c}</span>`;
+    b.onclick=()=>{ if(S.ans[id]!==undefined)return; S.ans[id]=k; save(); lock(); box.dispatchEvent(new Event('answered',{bubbles:true})); if(k===q.a)mini(b); };
+    ch.appendChild(b);
+  });
+  function lock(){
+    const pick=S.ans[id]; if(pick===undefined)return;
+    [...ch.children].forEach(b=>{const k=+b.dataset.k;b.disabled=true;
+      if(k===q.a)b.classList.add('right'); else if(k===pick)b.classList.add('wrong'); else b.classList.add('dim');});
+    const ok=pick===q.a;
+    fb.className='fb show '+(ok?'good':'bad');
+    fb.innerHTML=(ok?'<b>🔓 Unlocked! Great inference.</b><br>':`<b>🔐 Not quite. The best answer is ${letterOf(q.a)}.</b><br>`)+q.why;
+  }
+  lock(); return box;
+}
+
+function score(){
+  let c=0,t=0,ec=0,et=0;
+  SECTIONS.forEach((s,i)=>s.qs.forEach((q,j)=>{t++;const ok=S.ans[i+'-'+j]===q.a;if(ok)c++;
+    if(s.key==='exit'){et++;if(ok)ec++;}}));
+  return {c,t,ec,et};
+}
+function renderFinish(){
+  const r=score(), pct=Math.round(r.c/r.t*100);
+  const msg=pct>=85?'Master Locksmith! You can unlock any inference.':pct>=70?'Skilled Detective! You are reading between the lines.':'Detective in Training! Review the parts with 🔐 and try again with your teacher.';
+  const rows=SECTIONS.map((s,i)=>{const n=s.qs.filter((q,j)=>S.ans[i+'-'+j]===q.a).length;return `<tr><td>${s.title}</td><td>${n} / ${s.qs.length}</td></tr>`}).join('');
+  const d=new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+  app.innerHTML=`
+  <div class="card cert">
+    <div style="font-size:44px">🔑🏆🔑</div>
+    <div class="badge" style="display:inline-block">Certificate of Completion</div>
+    <div class="big">${esc(S.name)||'Detective'}</div>
+    <p>has completed <b>Unlock the Inference</b></p>
+    <p class="score">Total Score: ${r.c} / ${r.t} (${pct}%)<br>Exit Ticket: ${r.ec} / ${r.et}</p>
+    <p><b>${msg}</b></p>
+    <p style="color:var(--muted);font-size:15px">${d}</p>
+  </div>
+  <div class="card">
+    <h2 style="color:var(--navy)">My Results</h2>
+    <div class="tablewrap"><table><tr><th>Part</th><th>Correct</th></tr>${rows}</table></div>
+    <div class="teach green"><h3>Remember</h3><p><b>Text Clues + What I Know = Inference.</b> Always be ready to point to the evidence!</p></div>
+    <p style="font-size:15px;color:var(--muted)">Show this screen to your teacher.</p>
+    <div class="nav">
+      <button class="btn sec" id="review">← Review My Answers</button>
+      <button class="btn sec" id="reset">Start Over</button>
+    </div>
+  </div>`;
+  document.getElementById('review').onclick=()=>{S.done=false;S.step=1;save();render();};
+  document.getElementById('reset').onclick=()=>{
+    if(confirm('Start over? This will erase all of your saved answers.')){S={name:S.name,step:0,ans:{},done:false};save();render();}
+  };
+}
+function perm(n,seed){ // fixed, repeatable shuffle so letters stay the same on every iPad
+  const a=[...Array(n).keys()];let x=seed*9301+49297;
+  for(let k=n-1;k>0;k--){x=(x*9301+49297)%233280;const r=Math.floor(x/233280*(k+1));[a[k],a[r]]=[a[r],a[k]];}
+  return a;}
+function esc(s){return String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+/* ============ CONFETTI ============ */
+const cv=document.getElementById('confetti'),cx=cv.getContext('2d');let bits=[],anim=null;
+function size(){cv.width=innerWidth*devicePixelRatio;cv.height=innerHeight*devicePixelRatio;}
+size();addEventListener('resize',size);
+const COLS=['#e8505b','#f7913d','#f9d64a','#3cb878','#3b8fe0','#8a5cd6','#f2b632'];
+function burst(x,y,n,spread){
+  for(let k=0;k<n;k++)bits.push({x:x*devicePixelRatio,y:y*devicePixelRatio,vx:(Math.random()-.5)*spread,vy:-Math.random()*spread*.9-2,
+    s:(4+Math.random()*6)*devicePixelRatio,r:Math.random()*6,vr:(Math.random()-.5)*.3,c:COLS[k%COLS.length],life:0});
+  if(!anim)loop();
+}
+function loop(){
+  cx.clearRect(0,0,cv.width,cv.height);
+  bits.forEach(b=>{b.vy+=.25;b.x+=b.vx*devicePixelRatio*.5;b.y+=b.vy*devicePixelRatio*.5;b.r+=b.vr;b.life++;
+    cx.save();cx.translate(b.x,b.y);cx.rotate(b.r);cx.fillStyle=b.c;cx.fillRect(-b.s/2,-b.s/4,b.s,b.s/2);cx.restore();});
+  bits=bits.filter(b=>b.y<cv.height+40&&b.life<400);
+  anim=bits.length?requestAnimationFrame(loop):null;
+  if(!anim)cx.clearRect(0,0,cv.width,cv.height);
+}
+function mini(el){const r=el.getBoundingClientRect();burst(r.left+30,r.top+20,26,10);}
+function boom(){
+  let n=0;const t=setInterval(()=>{burst(innerWidth*Math.random(),innerHeight*.35,90,22);if(++n>5)clearInterval(t);},300);
+}
+
+render();
+</script>
+</body>
+</html>
